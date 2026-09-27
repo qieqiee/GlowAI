@@ -1,0 +1,934 @@
+/* ========================================
+   SERVICES PAGE
+======================================== */
+
+.services-page {
+    width: calc(100% - 60px);
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 45px 0 60px;
+}
+
+
+/* ========================================
+   HEADING
+======================================== */
+
+.services-heading {
+    margin-bottom: 28px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.services-heading h1 {
+    margin: 0 0 6px;
+
+    font-family: Arial, "Times New Roman", serif;
+    font-size: 30px;
+    font-weight: 500;
+
+    color: #211b1e;
+}
+
+.services-heading p {
+    margin: 0;
+
+    color: #62585d;
+    font-size: 13px;
+}
+
+
+/* ADD SERVICE */
+
+.add-service-btn {
+    padding: 11px 19px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    border: 1px solid #7b435d;
+    border-radius: 8px;
+
+    background: #7b435d;
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.add-service-btn:hover {
+    background: #ffffff;
+    color: #7b435d;
+}
+
+
+/* ========================================
+   SUCCESS ALERT
+======================================== */
+
+.service-alert {
+    margin-bottom: 22px;
+    padding: 12px 16px;
+
+    border: 1px solid #a8d5b7;
+    border-radius: 9px;
+
+    background: #e4f3e9;
+    color: #31784f;
+
+    font-size: 12px;
+}
+
+
+/* ========================================
+   SERVICE GRID
+======================================== */
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+
+/* ========================================
+   SERVICE CARD
+======================================== */
+
+.service-card {
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid #d6bdc8;
+    border-radius: 15px;
+
+    background: #fbf5f7;
+}
+
+
+/* CARD TOP */
+
+.service-card-top {
+    margin-bottom: 17px;
+    padding-bottom: 17px;
+
+    border-bottom: 1px solid #dfcfd6;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.service-category {
+    margin-bottom: 7px;
+    padding: 5px 9px;
+
+    display: inline-block;
+
+    border-radius: 20px;
+
+    background: #eadce2;
+    color: #7b435d;
+
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.service-card h2 {
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 21px;
+    font-weight: 500;
+
+    color: #211b1e;
+}
+
+
+/* PRICE */
+
+.service-price {
+    flex-shrink: 0;
+    text-align: right;
+}
+
+.service-price strong {
+    display: block;
+
+    color: #211b1e;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.service-price span {
+    display: block;
+    margin-top: 4px;
+
+    color: #75686e;
+    font-size: 11px;
+}
+
+
+/* ========================================
+   DESCRIPTION
+======================================== */
+
+.service-description {
+    min-height: 50px;
+    margin-bottom: 18px;
+
+    color: #5f5559;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   DETAILS
+======================================== */
+
+.service-details {
+    margin-bottom: 20px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.service-detail {
+    padding: 12px;
+
+    border-radius: 9px;
+
+    background: #f4e8ec;
+}
+
+.service-detail span {
+    display: block;
+    margin-bottom: 5px;
+
+    color: #786970;
+    font-size: 10px;
+}
+
+.service-detail strong {
+    color: #211b1e;
+
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+/* SERVICE INCLUDED */
+
+.service-included {
+    margin-bottom: 20px;
+}
+
+.service-included > span {
+    display: block;
+    margin-bottom: 7px;
+
+    color: #786970;
+    font-size: 10px;
+}
+
+.service-included p {
+    margin: 0;
+
+    color: #211b1e;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* ========================================
+   ACTIONS
+======================================== */
+
+.service-actions {
+    margin-top: auto;
+    padding-top: 17px;
+
+    border-top: 1px solid #dfcfd6;
+
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+}
+
+.service-actions form {
+    margin: 0;
+}
+
+.service-edit-btn,
+.service-delete-btn {
+    min-height: 36px;
+    padding: 0 15px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+/* EDIT */
+
+.service-edit-btn {
+    border: 1px solid #7b435d;
+
+    background: #7b435d;
+    color: #ffffff;
+}
+
+.service-edit-btn:hover {
+    background: #ffffff;
+    color: #7b435d;
+}
+
+
+/* DELETE */
+
+.service-delete-btn {
+    border: 1px solid #c95d5d;
+
+    background: #ffffff;
+    color: #a94a4a;
+}
+
+.service-delete-btn:hover {
+    background: #c95d5d;
+    color: #ffffff;
+}
+
+
+/* ========================================
+   EMPTY STATE
+======================================== */
+
+.services-empty {
+    padding: 60px 25px;
+
+    grid-column: 1 / -1;
+
+    border: 1px solid #d6bdc8;
+    border-radius: 15px;
+
+    background: #fbf5f7;
+
+    text-align: center;
+}
+
+.services-empty h3 {
+    margin: 0 0 8px;
+
+    font-family: Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+
+    color: #211b1e;
+}
+
+.services-empty p {
+    margin: 0;
+
+    color: #6b6065;
+    font-size: 12px;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 800px) {
+
+    .services-page {
+        width: calc(100% - 40px);
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 550px) {
+
+    .services-page {
+        width: calc(100% - 28px);
+        padding-top: 30px;
+    }
+
+    .services-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .services-heading h1 {
+        font-size: 28px;
+    }
+
+    .add-service-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .service-card {
+        padding: 19px;
+    }
+
+    .service-card-top {
+        flex-direction: column;
+    }
+
+    .service-price {
+        text-align: left;
+    }
+
+    .service-details {
+        grid-template-columns: 1fr;
+    }
+
+    .service-actions {
+        flex-direction: column;
+    }
+
+    .service-edit-btn,
+    .service-delete-btn {
+        width: 100%;
+    }
+}
+
+/* =========================================
+   EDIT SERVICE PAGE
+========================================= */
+
+.service-edit-page {
+    width: min(100% - 40px, 1050px);
+    margin: 0 auto;
+    padding: 42px 0 70px;
+}
+
+
+/* BACK */
+
+.service-back-link {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 25px;
+    color: #7b435d;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.service-back-link:hover {
+    color: #633448;
+}
+
+
+/* PAGE HEADING */
+
+.service-edit-heading {
+    margin-bottom: 28px;
+}
+
+.service-page-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #8b526b;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.service-edit-heading h1 {
+    margin: 0 0 8px;
+    color: #3d2932;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.service-edit-heading p {
+    margin: 0;
+    color: #87727b;
+    font-size: 14px;
+}
+
+
+/* CARD */
+
+.service-edit-card {
+    overflow: hidden;
+    background: #fffaf8;
+    border: 1px solid #e2d0d3;
+    border-radius: 18px;
+    box-shadow: 0 8px 28px rgba(83, 53, 66, 0.06);
+}
+
+.service-card-heading {
+    padding: 25px 30px;
+    background: #fbf5f7;
+    border-bottom: 1px solid #eadde1;
+}
+
+.service-card-heading h2 {
+    margin: 0 0 5px;
+    color: #4c313d;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.service-card-heading p {
+    margin: 0;
+    color: #907b84;
+    font-size: 13px;
+}
+
+
+/* FORM */
+
+.service-edit-form {
+    padding: 30px;
+}
+
+.service-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    margin-bottom: 24px;
+}
+
+.service-form-grid-three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.service-form-group {
+    min-width: 0;
+}
+
+.service-full-width {
+    margin-bottom: 24px;
+}
+
+
+/* LABELS */
+
+.service-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #4b3840;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.service-form-group small {
+    display: block;
+    margin-top: 7px;
+    color: #97838c;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* INPUTS */
+
+.service-form-group input,
+.service-form-group select,
+.service-form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #dbc8cf;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #382c31;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-form-group input,
+.service-form-group select {
+    height: 46px;
+    padding: 0 13px;
+}
+
+.service-form-group textarea {
+    min-height: 105px;
+    padding: 12px 13px;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.service-form-group input:focus,
+.service-form-group select:focus,
+.service-form-group textarea:focus {
+    border-color: #8a536b;
+    box-shadow: 0 0 0 3px rgba(123, 67, 93, 0.09);
+}
+
+
+/* PRICE PREFIX */
+
+.service-input-prefix,
+.service-input-suffix {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    height: 46px;
+    background: #ffffff;
+    border: 1px solid #dbc8cf;
+    border-radius: 10px;
+}
+
+.service-input-prefix:focus-within,
+.service-input-suffix:focus-within {
+    border-color: #8a536b;
+    box-shadow: 0 0 0 3px rgba(123, 67, 93, 0.09);
+}
+
+.service-input-prefix span {
+    padding: 0 0 0 13px;
+    color: #806a74;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.service-input-prefix input,
+.service-input-suffix input {
+    height: 44px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.service-input-prefix input:focus,
+.service-input-suffix input:focus {
+    border: none;
+    box-shadow: none;
+}
+
+.service-input-suffix span {
+    padding-right: 13px;
+    color: #927d86;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+
+/* ERRORS */
+
+.service-form-errors {
+    margin-bottom: 22px;
+    padding: 16px 20px;
+    background: #fff2f2;
+    border: 1px solid #eccaca;
+    border-radius: 12px;
+    color: #963f3f;
+    font-size: 13px;
+}
+
+.service-form-errors strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.service-form-errors ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+
+/* BUTTONS */
+
+.service-form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 25px;
+    border-top: 1px solid #eadde1;
+}
+
+.service-cancel-btn,
+.service-update-btn {
+    min-width: 125px;
+    padding: 11px 20px;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.service-cancel-btn {
+    background: #ffffff;
+    border: 1px solid #d9c4cc;
+    color: #755565;
+}
+
+.service-cancel-btn:hover {
+    background: #faf4f6;
+}
+
+.service-update-btn {
+    border: 1px solid #7b435d;
+    background: #7b435d;
+    color: #ffffff;
+}
+
+.service-update-btn:hover {
+    background: #6f3e4b;
+    border-color: #6f3e4b;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 760px) {
+    .service-edit-page {
+        width: min(100% - 28px, 1050px);
+        padding-top: 28px;
+    }
+
+    .service-form-grid,
+    .service-form-grid-three {
+        grid-template-columns: 1fr;
+    }
+
+    .service-edit-form,
+    .service-card-heading {
+        padding: 22px;
+    }
+
+    .service-edit-heading h1 {
+        font-size: 30px;
+    }
+
+    .service-form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .service-cancel-btn,
+    .service-update-btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* =========================================
+   TYPOGRAPHY STANDARDIZATION
+   SV CORRECTION
+========================================= */
+
+/* Page headings */
+.services-heading h1,
+.service-edit-heading h1,
+.services-empty h3,
+.service-card h2 {
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    color: #1f1f1f;
+}
+
+/* Main heading */
+.services-heading h1 {
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.services-heading p {
+    color: #333333;
+    font-size: 15px;
+}
+
+
+/* Buttons */
+.add-service-btn,
+.service-edit-btn,
+.service-delete-btn {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+
+/* Alert */
+.service-alert {
+    font-size: 14px;
+}
+
+
+/* Category */
+.service-category {
+    color: #6f3e4b;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* Service name */
+.service-card h2 {
+    font-size: 21px;
+    font-weight: 700;
+}
+
+
+/* PRICE / NUMBERS */
+.service-price,
+.service-price strong,
+.service-price span,
+.service-detail strong,
+.service-input-prefix,
+.service-input-prefix span,
+.service-input-prefix input,
+.service-input-suffix,
+.service-input-suffix span,
+.service-input-suffix input {
+    font-family: Arial, sans-serif;
+    font-style: normal;
+}
+
+.service-price strong {
+    color: #1f1f1f;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.service-price span {
+    color: #333333;
+    font-size: 13px;
+}
+
+
+/* Description */
+.service-description {
+    color: #2b2b2b;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* Service details */
+.service-detail span {
+    color: #444444;
+    font-size: 13px;
+}
+
+.service-detail strong {
+    color: #1f1f1f;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* Includes */
+.service-included > span {
+    color: #444444;
+    font-size: 13px;
+}
+
+.service-included p {
+    color: #1f1f1f;
+    font-size: 14px;
+}
+
+
+/* Empty state */
+.services-empty h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.services-empty p {
+    color: #333333;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   ADD / EDIT SERVICE FORM
+========================================= */
+
+.service-page-label {
+    font-size: 14px;
+}
+
+.service-edit-heading h1 {
+    color: #1f1f1f;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.service-edit-heading p {
+    color: #333333;
+    font-size: 15px;
+}
+
+.service-card-heading h2 {
+    color: #1f1f1f;
+    font-size: 18px;
+}
+
+.service-card-heading p {
+    color: #333333;
+    font-size: 14px;
+}
+
+.service-form-group label {
+    color: #222222;
+    font-size: 15px;
+}
+
+.service-form-group small {
+    color: #444444;
+    font-size: 13px;
+}
+
+.service-form-group input,
+.service-form-group select,
+.service-form-group textarea {
+    color: #222222;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+}
+
+.service-input-prefix span,
+.service-input-suffix span {
+    color: #333333;
+    font-size: 14px;
+}
+
+.service-form-errors {
+    font-size: 14px;
+}
+
+.service-cancel-btn,
+.service-update-btn {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}

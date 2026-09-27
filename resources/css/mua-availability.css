@@ -1,0 +1,982 @@
+/* ========================================
+   BASE
+======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #7b435d;
+    --primary-dark: #653649;
+    --surface: #ffffff;
+    --card: #fffaf8;
+    --background: #f8f3f1;
+    --border: #e5d5d8;
+    --text: #2f2527;
+    --muted: #8c797e;
+}
+
+body {
+    margin: 0;
+
+    background: var(--background);
+    color: var(--text);
+
+    font-family: Arial, sans-serif;
+}
+
+
+
+/* ========================================
+   PAGE
+======================================== */
+
+.availability-page {
+    width: min(1180px, calc(100% - 60px));
+
+    margin: 0 auto;
+
+    padding: 38px 0 60px;
+}
+
+.page-heading {
+    margin-bottom: 24px;
+}
+
+.page-eyebrow,
+.section-label {
+    color: #9b6876;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+}
+
+.page-heading h1 {
+    margin: 6px 0 7px;
+
+    color: #241b1d;
+
+    font-family: Arial, "Times New Roman", serif;
+    font-size: 31px;
+    font-weight: 600;
+}
+
+
+/* ========================================
+   ALERTS
+======================================== */
+
+.success-message,
+.error-message {
+    margin-bottom: 20px;
+    padding: 14px 18px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+}
+
+.success-message {
+    border: 1px solid #c9ddcd;
+
+    background: #eef7f0;
+    color: #3e7049;
+}
+
+.error-message {
+    border: 1px solid #e7c7cb;
+
+    background: #fff1f2;
+    color: #9c4854;
+}
+
+.error-message ul {
+    margin: 7px 0 0;
+    padding-left: 18px;
+}
+
+
+/* ========================================
+   COMMON CARD
+======================================== */
+
+.availability-card {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    background: var(--card);
+}
+
+.section-heading {
+    margin-bottom: 20px;
+}
+
+.section-heading h2 {
+    margin: 5px 0 5px;
+
+    color: #2e2225;
+
+    font-family: Arial, "Times New Roman", serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+
+/* ========================================
+   WEEKLY AVAILABILITY
+======================================== */
+
+.weekly-card {
+    padding: 26px 30px;
+
+    margin-bottom: 20px;
+}
+
+.weekly-list {
+    border-top: 1px solid #eadde0;
+}
+
+.weekly-row {
+    min-height: 68px;
+
+    display: grid;
+    grid-template-columns: 150px 190px 1fr 30px 1fr;
+    align-items: center;
+    gap: 14px;
+
+    border-bottom: 1px solid #eee2e4;
+}
+
+.day-name {
+    color: #392d30;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* TOGGLE */
+
+.working-toggle {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    cursor: pointer;
+}
+
+.working-toggle input {
+    position: absolute;
+
+    opacity: 0;
+    pointer-events: none;
+}
+
+.toggle-switch {
+    position: relative;
+
+    width: 36px;
+    height: 20px;
+
+    flex-shrink: 0;
+
+    border-radius: 20px;
+
+    background: #d8cbce;
+
+    transition: 0.2s ease;
+}
+
+.toggle-switch::after {
+    content: "";
+
+    position: absolute;
+
+    top: 3px;
+    left: 3px;
+
+    width: 14px;
+    height: 14px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    transition: 0.2s ease;
+}
+
+.working-toggle input:checked + .toggle-switch {
+    background: var(--primary);
+}
+
+.working-toggle input:checked + .toggle-switch::after {
+    transform: translateX(16px);
+}
+
+.working-text {
+    color: #5c4d52;
+
+    font-size: 13px;
+}
+
+
+/* TIME */
+
+.time-field label,
+.form-group label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #4e4749;
+
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.time-field input,
+.form-group input {
+    width: 100%;
+    height: 40px;
+
+    padding: 0 12px;
+
+    border: 1px solid #ddced2;
+    border-radius: 9px;
+
+    outline: none;
+
+    background: white;
+    color: #45373a;
+
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.time-field input:focus,
+.form-group input:focus {
+    border-color: #ad8290;
+
+    box-shadow: 0 0 0 3px rgba(123, 67, 93, 0.07);
+}
+
+.time-separator {
+    margin-top: 16px;
+
+    color: #7a6a6e;
+
+    font-size: 12px;
+
+    text-align: center;
+}
+
+.weekly-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 20px;
+}
+
+
+/* ========================================
+   BUTTON
+======================================== */
+
+.primary-button {
+    min-height: 42px;
+
+    padding: 0 22px;
+
+    border: 1px solid var(--primary);
+    border-radius: 9px;
+
+    background: var(--primary);
+    color: white;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.primary-button:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.full-button {
+    width: 100%;
+}
+
+
+/* ========================================
+   CALENDAR + BLOCK DATE GRID
+======================================== */
+
+.calendar-management-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(300px, 0.8fr);
+    gap: 20px;
+
+    align-items: start;
+
+    margin-bottom: 20px;
+}
+
+
+/* ========================================
+   CALENDAR
+======================================== */
+
+.calendar-card {
+    padding: 26px 28px;
+}
+
+.calendar-navigation {
+    margin-bottom: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.calendar-title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.calendar-title strong {
+    color: #2d2325;
+
+    font-family: Arial, serif;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.calendar-arrows {
+    display: flex;
+    gap: 8px;
+}
+
+.calendar-arrows a {
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid #d6bdc8;
+    border-radius: 50%;
+
+    color: var(--primary);
+
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+    line-height: 1;
+
+    transition: 0.2s ease;
+}
+
+.calendar-arrows a:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+
+    color: white;
+}
+
+
+/* CALENDAR TABLE */
+
+.booking-calendar {
+    width: 100%;
+
+    border-collapse: separate;
+    border-spacing: 4px 6px;
+
+    table-layout: fixed;
+}
+
+.booking-calendar th {
+    padding-bottom: 8px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.7px;
+
+    text-align: center;
+}
+
+.booking-calendar td {
+    height: 55px;
+
+    border: none;
+
+    text-align: center;
+    vertical-align: middle;
+}
+
+.calendar-day {
+    position: relative;
+}
+
+.calendar-date {
+    width: 38px;
+    height: 38px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--text);
+
+    font-size: 13px;
+    font-weight: 500;
+
+    transition: 0.2s ease;
+}
+
+.calendar-day:hover .calendar-date {
+    background: #eadce2;
+
+    color: var(--primary);
+}
+
+
+/* ========================================
+   TODAY
+======================================== */
+
+.calendar-day.today .calendar-date {
+    background: #f0e4e8;
+    border: 1px solid #9b6a79;
+
+    color: #7b435d;
+
+    font-size: 12px;
+}
+
+.calendar-day.today:hover .calendar-date {
+    background: #e7d4db;
+
+    color: #7b435d;
+}
+
+
+
+/* ========================================
+   BLOCKED DATE
+======================================== */
+
+.calendar-day.blocked .calendar-date {
+    background: #c95f67;
+    border: 1px solid #c95f67;
+
+    color: #ffffff;
+
+    font-weight: 600;
+}
+
+.calendar-day.blocked:hover .calendar-date {
+    background: #ad4d55;
+    border-color: #ad4d55;
+
+    color: #ffffff;
+}
+
+.blocked-status {
+    color: #b64e57;
+
+    font-size: 9px;
+}
+
+
+/* ========================================
+   CUSTOM HOURS
+======================================== */
+
+.calendar-day.custom-hours .calendar-date {
+    background: transparent;
+
+    border: 1px solid #a37180;
+    background: #a37180;
+    color: #ffffff;
+}
+
+.custom-status {
+    color: #a37180;
+
+    font-size: 9px;
+}
+
+/* If today is blocked, blocked colour takes priority */
+
+.calendar-day.today.blocked .calendar-date {
+    background: #c95f67;
+    border-color: #c95f67;
+
+    color: #ffffff;
+}
+
+/* LEGEND */
+
+.calendar-legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+
+    margin-top: 16px;
+    padding-top: 15px;
+
+    border-top: 1px solid #988184;
+}
+
+.calendar-legend span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #54363d;
+
+    font-size: 12px;
+}
+
+.legend-dot {
+    width: 8px;
+    height: 8px;
+
+    display: inline-block;
+
+    border-radius: 50%;
+}
+
+.available-dot {
+    background: #ddd0d4;
+}
+
+.custom-dot {
+    background: #a87989;
+}
+
+.blocked-dot {
+    background: #c95f67;
+}
+
+
+/* ========================================
+   BLOCK DATE
+======================================== */
+
+.block-date-card {
+    padding: 26px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+
+/* EXISTING BLOCKED DATES */
+
+.existing-section {
+    margin-top: 24px;
+    padding-top: 20px;
+
+    border-top: 1px solid #eadde0;
+}
+
+.existing-section h3 {
+    margin: 0 0 12px;
+
+    color: #4d3c40;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.existing-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.existing-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 11px 12px;
+
+    border: 1px solid #eadde0;
+    border-radius: 9px;
+
+    background: #fdf7f6;
+}
+
+.existing-item > div {
+    min-width: 0;
+}
+
+.existing-item strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #4a393d;
+
+    font-size: 13px;
+}
+
+.existing-item span {
+    display: block;
+
+    overflow: hidden;
+
+    color: #958186;
+
+    font-size: 12px;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.remove-button {
+    padding: 7px 10px;
+
+    border: 1px solid #d6aeb5;
+    border-radius: 7px;
+
+    background: transparent;
+    color: #a14d59;
+
+    font-family: inherit;
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+.remove-button:hover {
+    background: #a14d59;
+    border-color: #a14d59;
+
+    color: white;
+}
+
+.empty-state-small {
+    padding: 13px;
+
+    border-radius: 8px;
+
+    background: #f7eeee;
+    color: #958186;
+
+    font-size: 11px;
+}
+
+
+/* ========================================
+   CUSTOM WORKING HOURS
+======================================== */
+
+.custom-hours-card {
+    padding: 26px 30px;
+}
+
+.custom-hours-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1.5fr auto;
+    align-items: end;
+    gap: 13px;
+}
+
+.custom-hours-form .form-group {
+    margin: 0;
+}
+
+.custom-submit {
+    display: flex;
+}
+
+.custom-submit .primary-button {
+    height: 40px;
+
+    white-space: nowrap;
+}
+
+
+/* EXISTING OVERRIDES */
+
+.custom-existing {
+    margin-top: 24px;
+}
+
+.override-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.override-item {
+    display: grid;
+    grid-template-columns: 190px 1fr auto;
+    align-items: center;
+    gap: 22px;
+    font-size: 14px;
+    min-height: 0;
+    padding: 15px 18px;
+
+    border: 1px solid #b76a88;
+    border-radius: 12px;
+
+    background: #fffafb;
+}
+.override-date,
+.override-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.override-date strong,
+.override-info strong {
+    color: #594950;
+    font-weight: 500;
+    
+}
+
+.override-remove-form {
+    margin: 0;
+    justify-self: end;
+}
+
+.override-item .remove-button {
+    margin: 0;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 1000px) {
+
+    .calendar-management-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .custom-hours-form {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .custom-submit {
+        align-items: flex-end;
+    }
+
+    .weekly-row {
+        grid-template-columns: 120px 160px 1fr 25px 1fr;
+ 
+    }
+
+    @media (max-width: 600px) {
+
+        .override-item {
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+    
+            padding: 15px;
+        }
+    
+        .override-remove-form {
+            grid-column: 1 / -1;
+    
+            width: 100%;
+            justify-self: stretch;
+        }
+    
+        .override-item .remove-button {
+            width: 100%;
+        }
+    }
+}
+
+/* ========================================
+   BLOCK DATE - OPPOSITE COLOUR
+======================================== */
+
+.block-date-card {
+    background: #7b435d;
+    border-color: #7b435d;
+
+    color: #fffaf8;
+}
+
+
+/* HEADING */
+
+.block-date-card .section-label {
+    color: #e9d5dc;
+}
+
+.block-date-card .section-heading h2 {
+    color: #ffffff;
+}
+
+.block-date-card .section-heading p {
+    color: #eadde1;
+}
+
+
+/* FORM LABEL */
+
+.block-date-card .form-group label {
+    color: #ffffff;
+}
+
+
+/* INPUT */
+
+.block-date-card .form-group input {
+    background: #fffaf8;
+
+    border: 1px solid #e4ced5;
+
+    color: #3d3033;
+}
+
+.block-date-card .form-group input::placeholder {
+    color: #9b858b;
+}
+
+.block-date-card .form-group input:focus {
+    border-color: #ffffff;
+
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+}
+
+
+/* BLOCK DATE BUTTON - OPPOSITE */
+
+.block-date-card .primary-button {
+    background: #fffaf8;
+
+    border-color: #fffaf8;
+
+    color: #7b435d;
+}
+
+.block-date-card .primary-button:hover {
+    background: #f1e2e7;
+
+    border-color: #f1e2e7;
+
+    color: #69364d;
+}
+
+
+/* DIVIDER */
+
+.block-date-card .existing-section {
+    border-top-color: rgba(43, 13, 13, 0.25);
+}
+
+
+/* BLOCKED DATES HEADING */
+
+.block-date-card .existing-section h3 {
+    color: #ffffff;
+}
+
+
+/* BLOCKED DATE ITEM */
+
+.block-date-card .existing-item {
+    background: rgba(255, 255, 255, 0.12);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.block-date-card .existing-item strong {
+    color: #ffffff;
+}
+
+.block-date-card .existing-item span {
+    color: #ead9df;
+}
+
+
+/* REMOVE BUTTON */
+
+.block-date-card .remove-button {
+    background: transparent;
+
+    border: 1px solid #ffffff;
+
+    color: #ffffff;
+}
+
+.block-date-card .remove-button:hover {
+    background: #ffffff;
+
+    color: #7b435d;
+}
+
+
+/* EMPTY STATE */
+
+.block-date-card .empty-state-small {
+    background: rgba(255, 255, 255, 0.12);
+
+    color: #f0e2e6;
+}
+
+@media (max-width: 760px) {
+
+    .availability-page {
+        width: calc(100% - 30px);
+
+        padding-top: 25px;
+    }
+
+    .weekly-row {
+        grid-template-columns: 1fr 1fr;
+
+        padding: 14px 0;
+    }
+
+    .time-separator {
+        display: none;
+    }
+
+    .custom-hours-form {
+        grid-template-columns: 1fr;
+    }
+
+    .override-item {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-calendar td {
+        height: 48px;
+    }
+
+    .calendar-date {
+        width: 34px;
+        height: 34px;
+    }
+}

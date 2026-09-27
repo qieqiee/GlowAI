@@ -1,0 +1,267 @@
+.glowai-navbar {
+  --surface: #FFFFFF; --primary: #6F4F5F; --text: #2C2528; --muted: #786D72; --border: #E8E1E3; --secondary: #E8D8DE;
+  font-family: Arial, sans-serif; font-size: 16px; line-height: normal;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 6%;
+}
+.glowai-navbar, .glowai-navbar * { box-sizing: border-box; }
+.glowai-navbar .navbar-logo { display: block; max-width: none;
+    width: 125px;
+    height: 72px;
+    object-fit: contain;
+    transform: scale(1.35); }
+.glowai-navbar .nav-user form { margin: 0; }
+.glowai-navbar .logout-btn { font-family: Arial, sans-serif; font-size: 13.3333px; line-height: normal; font-weight: 400;
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--primary);
+    cursor: pointer;
+    padding: 9px 16px; }
+.glowai-navbar .nav-links a { font-weight: 400;
+    color: var(--text);
+    font-size: 14px;
+    text-decoration: none; }
+
+.glowai-navbar .nav-container {
+    max-width: 1200px;
+    min-height: 72px;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.glowai-navbar .logo-link {
+    width: 135px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.glowai-navbar .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.glowai-navbar .nav-links a:hover,
+.glowai-navbar .nav-links a.active {
+    color: var(--primary);
+}
+
+.glowai-navbar .nav-user {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.glowai-navbar .user-name {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.glowai-navbar .logout-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+
+.glowai-navbar .nav-links .mua-cta {
+    padding: 9px 14px;
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    color: var(--primary);
+}
+
+.glowai-navbar .nav-links .mua-cta:hover {
+    background: var(--secondary);
+}
+
+.glowai-navbar .nav-menu {
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 28px;
+}
+
+.glowai-navbar .nav-toggle {
+    display: none;
+}
+
+/* =========================================
+   RESPONSIVE CUSTOMER NAVBAR
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .glowai-navbar {
+        padding: 0 5%;
+    }
+
+    .glowai-navbar .nav-container {
+        position: relative;
+        min-height: 72px;
+        gap: 15px;
+    }
+
+
+    /* HAMBURGER BUTTON */
+
+    .glowai-navbar .nav-toggle {
+        width: 42px;
+        height: 42px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        gap: 5px;
+
+        padding: 0;
+
+        border: 1px solid var(--border);
+        border-radius: 8px;
+
+        background: #fff;
+        cursor: pointer;
+    }
+
+    .glowai-navbar .nav-toggle span {
+        width: 19px;
+        height: 2px;
+
+        display: block;
+
+        border-radius: 999px;
+        background: var(--primary);
+
+        transition: transform 0.2s ease,
+                    opacity 0.2s ease;
+    }
+
+
+    /* HAMBURGER -> X */
+
+    .glowai-navbar .nav-toggle.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .glowai-navbar .nav-toggle.open span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .glowai-navbar .nav-toggle.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+
+    /* MOBILE MENU */
+
+    .glowai-navbar .nav-menu {
+        position: absolute;
+
+        top: calc(100% + 1px);
+        left: 0;
+        right: 0;
+
+        z-index: 1000;
+
+        display: none;
+
+        padding: 18px;
+
+        background: #fff;
+
+        border: 1px solid var(--border);
+        border-top: none;
+
+        border-radius: 0 0 12px 12px;
+
+        box-shadow: 0 12px 24px rgba(44, 37, 40, 0.08);
+    }
+
+    .glowai-navbar .nav-menu.open {
+        display: block;
+    }
+
+
+    /* LINKS */
+
+    .glowai-navbar .nav-links {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 4px;
+    }
+
+    .glowai-navbar .nav-links a {
+        width: 100%;
+
+        display: block;
+
+        padding: 12px 13px;
+
+        border-radius: 7px;
+
+        font-size: 14px;
+    }
+
+    .glowai-navbar .nav-links a:hover,
+    .glowai-navbar .nav-links a.active {
+        background: #f8f2f4;
+        color: var(--primary);
+    }
+
+
+    /* BECOME MUA */
+
+    .glowai-navbar .nav-links .mua-cta {
+        margin-top: 5px;
+        padding: 11px 13px;
+    }
+
+
+    /* USER + LOGOUT */
+
+    .glowai-navbar .nav-user {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 15px;
+
+        margin-top: 14px;
+        padding-top: 14px;
+
+        border-top: 1px solid var(--border);
+    }
+
+    .glowai-navbar .user-name {
+        display: block;
+
+        min-width: 0;
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .glowai-navbar .logout-btn {
+        flex-shrink: 0;
+    }
+}

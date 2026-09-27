@@ -1,0 +1,1080 @@
+/* ========================================
+   PAGE HEADING
+======================================== */
+
+.bookings-heading {
+    margin-bottom: 28px;
+}
+
+.bookings-heading h1 {
+    margin: 0 0 6px;
+
+    font-family: Arial, "Times New Roman", serif;
+    font-size: 34px;
+    font-weight: 500;
+
+    color: #211b1e;
+}
+
+.bookings-heading p {
+    margin: 0;
+
+    color: #4c4448;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* ========================================
+   BOOKING TABS
+======================================== */
+
+.booking-tabs {
+    margin-bottom: 28px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 14px;
+}
+
+.booking-tab {
+    padding: 12px 18px;
+
+    border-radius: 22px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+/* NUMBER BADGE */
+
+.booking-tab span {
+    margin-left: 7px;
+    padding: 3px 8px;
+
+    border-radius: 20px;
+
+    background: #ffffff;
+    color: #222222;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+/* Badge when tab is active */
+
+.booking-tab.active span {
+    background: rgba(255, 255, 255, 0.9);
+    color: #222222;
+}
+
+
+/* =========================
+   PENDING - YELLOW / ORANGE
+========================= */
+
+.booking-tab[data-tab="pending"] {
+    background: #fff1c7;
+    border: 1px solid #f0c86c;
+    color: #c76a00;
+}
+
+.booking-tab[data-tab="pending"]:hover,
+.booking-tab[data-tab="pending"].active {
+    background: #f4b942;
+    border-color: #f4b942;
+    color: #ffffff;
+}
+
+.booking-tab[data-tab="pending"] span {
+    color: #c76a00;
+}
+
+
+/* =========================
+   ACCEPTED - GREEN
+========================= */
+
+.booking-tab[data-tab="accepted"] {
+    background: #e4f3e9;
+    border: 1px solid #a8d5b7;
+    color: #31784f;
+}
+
+.booking-tab[data-tab="accepted"]:hover,
+.booking-tab[data-tab="accepted"].active {
+    background: #4f9b6b;
+    border-color: #4f9b6b;
+    color: #ffffff;
+}
+
+.booking-tab[data-tab="accepted"] span {
+    color: #31784f;
+}
+
+
+/* =========================
+   REJECTED - RED
+========================= */
+
+.booking-tab[data-tab="rejected"] {
+    background: #f8e5e5;
+    border: 1px solid #e6b5b5;
+    color: #a94a4a;
+}
+
+.booking-tab[data-tab="rejected"]:hover,
+.booking-tab[data-tab="rejected"].active {
+    background: #c95d5d;
+    border-color: #c95d5d;
+    color: #ffffff;
+}
+
+.booking-tab[data-tab="rejected"] span {
+    color: #a94a4a;
+}
+
+
+/* =========================
+   PAST - GREY
+========================= */
+
+.booking-tab[data-tab="past"] {
+    background: #eeeeee;
+    border: 1px solid #d0d0d0;
+    color: #626262;
+}
+
+.booking-tab[data-tab="past"]:hover,
+.booking-tab[data-tab="past"].active {
+    background: #777777;
+    border-color: #777777;
+    color: #ffffff;
+}
+
+.booking-tab[data-tab="past"] span {
+    color: #626262;
+}
+/* ========================================
+   SECTIONS
+======================================== */
+
+.booking-section {
+    display: none;
+}
+
+.booking-section.active {
+    display: block;
+}
+
+
+/* ========================================
+   BOOKING CARD
+======================================== */
+
+.booking-card {
+    margin-bottom: 18px;
+    padding: 25px;
+
+    border: 1px solid #d6bdc8;
+    border-radius: 15px;
+
+    background: #fbf5f7;
+}
+
+
+/* CARD TOP */
+
+.booking-card-top {
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #dfcfd6;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.booking-number {
+    color: #433a3e;
+
+    font-size: 13px;
+}
+
+.booking-card-top h2 {
+    margin: 5px 0 0;
+
+    color: #171217;
+
+    font-family: Arial, serif;
+    font-size: 21px;
+    font-weight: 500;
+}
+
+
+/* ========================================
+   STATUS
+======================================== */
+
+.booking-status {
+    flex-shrink: 0;
+
+    padding: 7px 13px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+/* Pending */
+
+.booking-status-pending {
+    background: #ffe7a3;
+    color: #e66b00;
+}
+
+
+/* Accepted */
+
+.booking-status-accepted {
+    background: #dff2e6;
+    color: #2f7d4f;
+}
+
+
+/* Rejected */
+
+.booking-status-rejected {
+    background: #f7dddd;
+    color: #a63f3f;
+}
+
+
+/* Past */
+
+.booking-status-past {
+    background: #e9e7e8;
+    color: #655d61;
+}
+
+
+/* ========================================
+   BOOKING INFORMATION
+======================================== */
+
+.booking-info-grid {
+    padding: 22px 0;
+
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 0.8fr 1.2fr;
+
+    gap: 20px;
+}
+
+.booking-info {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.booking-info span {
+    color: #453e41;
+
+    font-size: 13px;
+}
+
+.booking-info strong {
+    color: #111111;
+
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.booking-info small {
+    color: #544d50;
+
+    font-size: 12px;
+}
+
+
+/* ========================================
+   CARD FOOTER
+======================================== */
+
+.booking-card-footer {
+    padding-top: 17px;
+
+    border-top: 1px solid #dfcfd6;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.booking-price {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.booking-price span {
+    color: #655b60;
+
+    font-size: 13px;
+}
+
+.booking-price strong {
+    color: #171217;
+
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+/* VIEW BUTTON */
+
+.booking-view-button {
+    padding: 10px 17px;
+
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+
+    background: var(--primary);
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.booking-view-button:hover {
+    background: #ffffff;
+    color: var(--primary);
+}
+
+
+
+/* ========================================
+   MUA PAGE
+======================================== */
+
+body {
+    margin: 0;
+    background: #f8f3f1;
+    color: #211b1e;
+    font-family: Arial, sans-serif;
+}
+
+.bookings-page {
+    padding-top: 45px;
+    padding-bottom: 60px;
+}
+
+
+/* ========================================
+   MUA NAVBAR
+======================================== */
+
+
+/* ========================================
+   ALERT
+======================================== */
+
+.booking-alert {
+    margin-bottom: 20px;
+    padding: 13px 16px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+}
+
+.booking-alert-success {
+    background: #e4f3e9;
+    color: #31784f;
+    border: 1px solid #a8d5b7;
+}
+
+.booking-alert-error {
+    background: #f8e5e5;
+    color: #a94a4a;
+    border: 1px solid #e6b5b5;
+}
+
+
+/* ========================================
+   NOTES
+======================================== */
+
+.booking-notes {
+    padding: 0 0 18px;
+}
+
+.booking-notes span {
+    color: #655b60;
+    font-size: 11px;
+}
+
+.booking-notes p {
+    margin: 5px 0 0;
+
+    color: #171217;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* ========================================
+   ACTIONS
+======================================== */
+
+.booking-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+.booking-actions form {
+    margin: 0;
+}
+
+.booking-reject-button,
+.booking-accept-button,
+.booking-chat-button {
+    min-height: 38px;
+    padding: 0 17px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+/* REJECT */
+
+.booking-reject-button {
+    border: 1px solid #c95d5d;
+
+    background: #ffffff;
+    color: #a94a4a;
+}
+
+.booking-reject-button:hover {
+    background: #c95d5d;
+    color: #ffffff;
+}
+
+
+/* ACCEPT */
+
+.booking-accept-button {
+    border: 1px solid #4f9b6b;
+
+    background: #4f9b6b;
+    color: #ffffff;
+}
+
+.booking-accept-button:hover {
+    background: #ffffff;
+    color: #31784f;
+}
+
+
+/* CHAT */
+
+.booking-chat-button {
+    border: 1px solid #7b435d;
+
+    background: #7b435d;
+    color: #ffffff;
+}
+
+.booking-chat-button:hover {
+    background: #ffffff;
+    color: #7b435d;
+}
+
+
+/* UNREAD CHAT COUNT */
+
+.chat-count {
+    min-width: 19px;
+    height: 19px;
+
+    margin-left: 7px;
+    padding: 0 5px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+
+    background: #ffffff;
+    color: #7b435d;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* ========================================
+   RESPONSIVE ACTIONS
+======================================== */
+
+@media (max-width: 500px) {
+
+    .booking-actions {
+        width: 100%;
+    }
+
+    .booking-actions form {
+        flex: 1;
+    }
+
+    .booking-reject-button,
+    .booking-accept-button,
+    .booking-chat-button {
+        width: 100%;
+    }
+}
+/* ========================================
+   FIX PAGE WIDTH - SAME AS CUSTOMER
+======================================== */
+
+.bookings-page {
+    width: calc(100% - 60px);
+    max-width: 1050px !important;
+
+    margin: 0 auto !important;
+
+    padding: 45px 0 60px;
+}
+
+/* ========================================
+   RESPONSIVE - TABLET / SPLIT SCREEN
+======================================== */
+
+@media (max-width: 950px) {
+
+    /* NAVBAR */
+
+
+    /* PAGE */
+    .bookings-page {
+        width: calc(100% - 40px);
+    }
+
+    .booking-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 18px;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE - SMALL TABLET
+======================================== */
+
+@media (max-width: 750px) {
+
+    /* Navbar becomes two rows */
+
+
+    /* BOOKING TABS */
+    .booking-tabs {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+
+    /* BOOKING INFO */
+    .booking-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE - MOBILE
+======================================== */
+
+@media (max-width: 500px) {
+
+    .bookings-page {
+        width: calc(100% - 28px);
+        padding-top: 30px;
+    }
+
+    .bookings-heading h1 {
+        font-size: 28px;
+    }
+
+
+    /* TABS */
+    .booking-tabs {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .booking-tab {
+        padding: 11px 8px;
+        font-size: 12px;
+    }
+
+
+    /* CARD */
+    .booking-card {
+        padding: 18px;
+    }
+
+    .booking-card-top {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .booking-card-top h2 {
+        font-size: 19px;
+    }
+
+
+    /* INFORMATION */
+    .booking-info-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+
+    /* FOOTER */
+    .booking-card-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .booking-actions {
+        width: 100%;
+    }
+
+    .booking-actions form {
+        flex: 1;
+    }
+
+    .booking-reject-button,
+    .booking-accept-button,
+    .booking-chat-button {
+        width: 100%;
+    }
+}
+
+/* ========================================
+   FLOATING BOOKING CHAT
+======================================== */
+
+.floating-chat-panel {
+    position: fixed;
+    right: 28px;
+    bottom: 0;
+
+    width: 380px;
+    height: 540px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #ffffff;
+
+    border: 1px solid #e2d0d3;
+    border-bottom: none;
+
+    border-radius: 16px 16px 0 0;
+
+    box-shadow: 0 8px 35px rgba(70, 45, 55, 0.18);
+
+    overflow: hidden;
+
+    z-index: 9999;
+}
+
+
+/* HEADER */
+
+.floating-chat-header {
+    min-height: 68px;
+    padding: 13px 16px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    background: #fffafa;
+
+    border-bottom: 1px solid #eadde0;
+}
+
+.floating-chat-header > div:first-child {
+    min-width: 0;
+}
+
+.floating-chat-header strong {
+    display: block;
+
+    color: #21181c;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.floating-chat-header span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #8b747b;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* HEADER BUTTONS */
+
+.floating-chat-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.floating-chat-controls button {
+    width: 30px;
+    height: 30px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background: transparent;
+    color: #6d5960;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.floating-chat-controls button:hover {
+    background: #f0e5e8;
+    color: #7b435d;
+}
+
+
+/* ========================================
+   CHAT CONTENT
+======================================== */
+
+.floating-chat-content {
+    min-height: 0;
+    flex: 1;
+}
+
+.embedded-chat {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #ffffff;
+}
+
+
+/* BOOKING INFORMATION */
+
+.embedded-booking-info {
+    min-height: 38px;
+    padding: 10px 16px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    background: #fbf6f7;
+
+    border-bottom: 1px solid #eee3e6;
+
+    color: #806c72;
+
+    font-size: 10px;
+}
+
+.embedded-booking-info strong {
+    color: #5e454e;
+    font-weight: 600;
+}
+
+
+/* ========================================
+   MESSAGES
+======================================== */
+
+.embedded-chat-messages {
+    min-height: 0;
+    flex: 1;
+
+    padding: 18px 15px;
+
+    overflow-y: auto;
+
+    background: #ffffff;
+}
+
+
+/* EMPTY CHAT */
+
+.embedded-chat-empty {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    color: #9b858c;
+}
+
+.embedded-chat-empty strong {
+    margin-bottom: 5px;
+
+    color: #604d54;
+
+    font-family: Arial, serif;
+    font-size: 15px;
+}
+
+.embedded-chat-empty p {
+    margin: 0;
+
+    font-size: 11px;
+}
+
+
+/* MESSAGE */
+
+.embedded-message-row {
+    margin-bottom: 14px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.embedded-message-row.mine {
+    align-items: flex-end;
+}
+
+.embedded-message-row.theirs {
+    align-items: flex-start;
+}
+
+.embedded-message-sender {
+    margin: 0 7px 4px;
+
+    color: #8e777e;
+
+    font-size: 9px;
+}
+
+.embedded-message-bubble {
+    max-width: 78%;
+
+    padding: 9px 12px;
+
+    border-radius: 14px;
+
+    font-size: 12px;
+    line-height: 1.45;
+
+    word-break: break-word;
+}
+
+.embedded-message-row.mine .embedded-message-bubble {
+    background: #7b435d;
+    color: #ffffff;
+
+    border-bottom-right-radius: 4px;
+}
+
+.embedded-message-row.theirs .embedded-message-bubble {
+    background: #f2e9ec;
+    color: #33272b;
+
+    border-bottom-left-radius: 4px;
+}
+
+.embedded-message-time {
+    margin: 4px 6px 0;
+
+    color: #a08e94;
+
+    font-size: 8px;
+}
+
+
+/* ========================================
+   CHAT FOOTER
+======================================== */
+
+.embedded-chat-footer {
+    padding: 12px 14px;
+
+    flex-shrink: 0;
+
+    background: #fffafa;
+
+    border-top: 1px solid #eadde0;
+}
+
+.embedded-chat-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.embedded-chat-input {
+    min-height: 42px;
+    max-height: 80px;
+
+    flex: 1;
+
+    padding: 11px 12px;
+
+    resize: none;
+
+    outline: none;
+
+    border: 1px solid #dfcdd2;
+    border-radius: 10px;
+
+    background: #ffffff;
+    color: #33272b;
+
+    font-family: inherit;
+    font-size: 11px;
+}
+
+.embedded-chat-input:focus {
+    border-color: #9a6376;
+}
+
+.embedded-chat-input::placeholder {
+    color: #aa969c;
+}
+
+.embedded-chat-send {
+    height: 42px;
+    min-width: 62px;
+
+    padding: 0 14px;
+
+    border: 1px solid #7b435d;
+    border-radius: 9px;
+
+    background: #7b435d;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 11px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.embedded-chat-send:hover {
+    background: #ffffff;
+    color: #7b435d;
+}
+
+.embedded-chat-error {
+    margin: 7px 0 0;
+
+    color: #b94f4f;
+
+    font-size: 10px;
+}
+
+
+/* LOADING */
+
+.chat-loading {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #907a81;
+
+    font-size: 11px;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 500px) {
+
+    .floating-chat-panel {
+        right: 10px;
+
+        width: calc(100% - 20px);
+        height: 70vh;
+    }
+}

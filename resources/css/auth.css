@@ -1,0 +1,404 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+.glowai-guest-body {
+    margin: 0;
+    min-height: 100vh;
+    background: #fbf7f5;
+    color: #402f31;
+    font-family: Arial, sans-serif;
+}
+
+/* =========================
+   AUTH LAYOUT
+========================= */
+
+.glowai-auth-page {
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.glowai-auth-form-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fffaf8;
+    padding: 55px 70px;
+}
+
+.glowai-auth-form {
+    width: 100%;
+    max-width: 460px;
+}
+
+.glowai-auth-brand {
+    margin-bottom: 15px;
+}
+
+.glowai-auth-brand img {
+    width: 100px;
+    height: auto;
+    display: block;
+}
+
+.glowai-auth-heading {
+    margin-bottom: 36px;
+}
+
+.auth-eyebrow {
+    margin: 0 0 12px;
+    color: #874e5d;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.glowai-auth-heading h1 {
+    margin: 0 0 16px;
+    color: #1f1f1f;
+    font-family: Arial, sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.glowai-auth-heading h1 em {
+    color: #874e5d;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.glowai-auth-heading > p:last-child {
+    max-width: 410px;
+    margin: 0;
+    color: #806d70;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.glowai-field {
+    margin-bottom: 22px;
+}
+
+.glowai-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #49383b;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.glowai-field input {
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    border: 1px solid #dbc8cc;
+    border-radius: 7px;
+    outline: none;
+    background: #fff;
+    color: #402f31;
+    font-size: 16px;
+    transition: 0.2s ease;
+}
+
+.glowai-field input::placeholder {
+    color:  #666666;
+}
+
+.glowai-field input:focus {
+    border-color: #955c69;
+    box-shadow: 0 0 0 3px rgba(149, 92, 105, 0.10);
+}
+
+.glowai-password-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.glowai-password-label a {
+    color: #955c69;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.glowai-password-label a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   REMEMBER
+========================= */
+
+.glowai-remember {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 27px;
+    color: #766467;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.glowai-remember input {
+    accent-color: #874e5d;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.glowai-login-btn {
+    width: 100%;
+    height: 51px;
+    border: 0;
+    border-radius: 7px;
+    background: #874e5d;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.glowai-login-btn:hover {
+    background: #6f3e4b;
+}
+
+.glowai-auth-switch {
+    margin: 25px 0 0;
+    color: #806d70;
+    font-size: 14px;
+    text-align: center;
+}
+
+.glowai-auth-switch a {
+    color: #874e5d;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.glowai-auth-switch a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   IMAGE SIDE
+========================= */
+
+.glowai-auth-image-side {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background: #7d5861;
+}
+
+.glowai-auth-image-side > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.glowai-auth-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(46, 27, 31, 0.38);
+}
+
+.glowai-image-content {
+    position: absolute;
+    z-index: 2;
+    left: 65px;
+    right: 65px;
+    bottom: 70px;
+    color: #fff;
+}
+
+.glowai-image-content > p {
+    margin: 0 0 14px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.glowai-image-content h2 {
+    margin: 0 0 17px;
+    font-family: Arial, sans-serif;
+    font-size: 46px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.glowai-image-content h2 em {
+    font-style: normal;
+    font-weight: 700;
+}
+
+.glowai-image-content span {
+    display: block;
+    max-width: 440px;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 850px) {
+
+    .glowai-auth-page {
+        grid-template-columns: 1fr;
+    }
+
+    .glowai-auth-form-side {
+        min-height: 100vh;
+        padding: 45px 25px;
+    }
+
+    .glowai-auth-image-side {
+        display: none;
+    }
+
+    .glowai-auth-brand {
+        margin-bottom: 35px;
+    }
+
+    .glowai-auth-heading h1 {
+        font-size: 40px;
+    }
+}
+
+/* =========================
+   REGISTER PAGE
+========================= */
+
+.glowai-register-page .glowai-auth-form-side {
+    align-items: flex-start;
+    padding-top: 20px;
+    padding-bottom: 35px;
+}
+
+.glowai-register-form {
+    max-width: 500px;
+    transform: translateY(-30px);
+}
+
+.glowai-register-form .glowai-auth-brand {
+    margin-bottom: 12px;
+}
+
+.glowai-register-form .glowai-auth-heading {
+    margin-bottom: 24px;
+}
+
+.glowai-register-form .glowai-auth-heading h1 {
+    font-size: 44px;
+}
+
+.glowai-register-form .glowai-field {
+    margin-bottom: 15px;
+}
+
+.glowai-select {
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    border: 1px solid #dbc8cc;
+    border-radius: 7px;
+    outline: none;
+    background: #fff;
+    color: #402f31;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.glowai-select:focus {
+    border-color: #955c69;
+    box-shadow: 0 0 0 3px rgba(149, 92, 105, 0.10);
+}
+
+.glowai-register-passwords {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+@media (max-width: 1100px) {
+
+    .glowai-register-passwords {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
+.password-input-wrap {
+    position: relative;
+}
+
+.password-input-wrap input {
+    padding-right: 48px !important;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+
+    width: 28px;
+    height: 28px;
+    padding: 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    background: transparent;
+    color: #8b6670;
+    cursor: pointer;
+}
+
+.password-toggle svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.password-toggle:hover {
+    color: #6f3e4b;
+}
+
+.eye-closed {
+    display: none;
+}
+
+.password-toggle.is-visible .eye-open {
+    display: none;
+}
+
+.password-toggle.is-visible .eye-closed {
+    display: block;
+}
