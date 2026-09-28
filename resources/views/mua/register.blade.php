@@ -48,7 +48,7 @@
 
             {{-- FULL NAME --}}
             <div class="mua-field">
-                <label for="full_name">Full Name</label>
+                <label for="full_name">Name</label>
 
                 <input
                     id="full_name"

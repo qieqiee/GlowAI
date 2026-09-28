@@ -54,7 +54,7 @@
 
                     {{-- Full Name --}}
                     <div class="glowai-field">
-                        <label for="name">Full Name</label>
+                        <label for="name">Name</label>
 
                         <input
                             id="name"
@@ -64,7 +64,7 @@
                             required
                             autofocus
                             autocomplete="name"
-                            placeholder="Enter your full name"
+                            placeholder="Enter your name"
                         >
 
                         <x-input-error

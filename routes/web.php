@@ -216,9 +216,6 @@ Route::middleware(['auth'])->group(function () {
     ->name('admin.')
     ->group(function () {
 
-        Route::get('/dashboard', [AdminController::class, 'dashboard'])
-            ->name('dashboard');
-
         Route::get('/users', [AdminController::class, 'users'])
             ->name('users.index');
 
