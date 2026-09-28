@@ -17,6 +17,7 @@ class MuaBookingController extends Controller
                 'makeup_artist_id',
                 $makeupArtist->id
             )
+            
             ->with(['customer', 'service'])
             ->orderBy('booking_date')
             ->orderBy('booking_time')
@@ -42,6 +43,11 @@ class MuaBookingController extends Controller
                 ->with('error', 'This booking is no longer pending.');
         }
 
+        if ($booking->payment_status !== 'paid') {
+            return redirect()->route('mua.bookings.index')
+                ->with('error', 'This booking cannot be accepted because the deposit payment has not been completed.');
+        }
+
         $booking->update([
             'status' => 'accepted',
         ]);
@@ -62,6 +68,11 @@ class MuaBookingController extends Controller
         if ($booking->status !== 'pending') {
             return redirect()->route('mua.bookings.index')
                 ->with('error', 'This booking is no longer pending.');
+        }
+
+        if ($booking->payment_status !== 'paid') {
+            return redirect()->route('mua.bookings.index')
+                ->with('error', 'This booking cannot be rejected because the deposit payment has not been completed.');
         }
 
         $booking->update([

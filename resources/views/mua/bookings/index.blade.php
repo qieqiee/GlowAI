@@ -14,6 +14,7 @@
 
     $pendingBookings = $bookings->filter(function ($booking) use ($today) {
         return $booking->status === 'pending'
+            && $booking->payment_status === 'paid'
             && $booking->booking_date->copy()->startOfDay()->gte($today);
     });
 
