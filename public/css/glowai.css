@@ -4277,6 +4277,107 @@ body {
     margin: 3px 0;
 }
 
+/* CAMERA OPTION */
+
+.ai-photo-options {
+    max-width: 520px;
+    margin: 12px auto 14px;
+    display: flex;
+    justify-content: center;
+}
+
+#takePhotoBtn {
+    padding: 9px 20px;
+
+    border: 1px solid #7b435d;
+    border-radius: 8px;
+
+    background: #ffffff;
+    color: #7b435d;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#takePhotoBtn:hover {
+    background: #f2e6ea;
+}
+
+/* CAMERA PREVIEW */
+
+.ai-camera-container {
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#cameraPreview {
+    display: block;
+
+    width: 100%;
+    max-height: 390px;
+
+    border: 1.5px solid #e4cfd8;
+    border-radius: 14px;
+
+    background: #1f1f1f;
+    object-fit: cover;
+}
+
+/* CAMERA ACTION BUTTONS */
+
+.ai-camera-actions {
+    margin-top: 14px;
+
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#capturePhotoBtn,
+#cancelCameraBtn {
+    min-width: 125px;
+    padding: 9px 18px;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+/* Primary camera action */
+#capturePhotoBtn {
+    border: 1px solid #7b435d;
+
+    background: #7b435d;
+    color: #ffffff;
+}
+
+#capturePhotoBtn:hover {
+    background: #ffffff;
+    color: #7b435d;
+}
+
+/* Secondary action */
+#cancelCameraBtn {
+    border: 1px solid #b8939f;
+
+    background: #ffffff;
+    color: #7b435d;
+}
+
+#cancelCameraBtn:hover {
+    background: #f2e6ea;
+    border-color: #7b435d;
+}
 
 /* MOBILE */
 

@@ -42,6 +42,11 @@
             id="aiUploadForm"
         >
             @csrf
+            <div class="ai-photo-options">
+                 <button type="button" id="takePhotoBtn">
+                    Take Photo
+                </button>
+            </div>
 
             <label for="face_image" class="ai-upload-box" id="aiUploadBox">
 
@@ -49,7 +54,7 @@
                 <div class="ai-upload-placeholder" id="uploadPlaceholder">
                     <div class="upload-icon">+</div>
 
-                    <strong>Choose or Take Photo</strong>
+                    <strong>Choose Photo</strong>
 
                     <span>
                         JPG or PNG · Maximum 5 MB
@@ -78,6 +83,22 @@
                 >
 
             </label>
+            
+            <div class="ai-camera-container" id="cameraContainer" style="display: none;">
+                <video id="cameraPreview" autoplay playsinline></video>
+
+                <div class="ai-camera-actions">
+                    <button type="button" id="capturePhotoBtn">
+                        Capture Photo
+                    </button>
+
+                    <button type="button" id="cancelCameraBtn">
+                        Cancel
+                    </button>
+                </div>
+
+                <canvas id="cameraCanvas" style="display: none;"></canvas>
+            </div>
 
             {{-- Selected filename --}}
             <div class="ai-selected-file" id="selectedFile"></div>
@@ -153,37 +174,136 @@ document.addEventListener('DOMContentLoaded', function () {
     const selectedFile = document.getElementById('selectedFile');
     const fileError = document.getElementById('fileError');
     const analyseButton = document.getElementById('analyseButton');
+    const takePhotoBtn = document.getElementById('takePhotoBtn');
+    const cameraContainer = document.getElementById('cameraContainer');
+    const cameraPreview = document.getElementById('cameraPreview');
+    const capturePhotoBtn = document.getElementById('capturePhotoBtn');
+    const cancelCameraBtn = document.getElementById('cancelCameraBtn');
+    const cameraCanvas = document.getElementById('cameraCanvas');
 
-    input.addEventListener('change', function () {
+    
+    let cameraStream = null;
 
-        const file = this.files[0];
+            takePhotoBtn.addEventListener('click', async function () {
+                fileError.textContent = '';
 
-        fileError.textContent = '';
-        selectedFile.textContent = '';
-        analyseButton.disabled = true;
+                try {
+                    cameraStream = await navigator.mediaDevices.getUserMedia({
+                        video: {
+                            facingMode: 'user'
+                        },
+                        audio: false
+                    });
 
-        if (!file) {
-            resetPreview();
-            return;
-        }
+                    cameraPreview.srcObject = cameraStream;
 
-        const allowedTypes = ['image/jpeg', 'image/png'];
+                    document.getElementById('aiUploadBox').style.display = 'none';
+                    cameraContainer.style.display = 'block';
 
-        if (!allowedTypes.includes(file.type)) {
-            fileError.textContent = 'Please choose a JPG or PNG image.';
-            input.value = '';
-            resetPreview();
-            return;
-        }
+                } catch (error) {
+                    fileError.textContent =
+                        'Camera could not be accessed. Please allow camera permission or upload a photo instead.';
+                }
+            });
 
-        const maxSize = 5 * 1024 * 1024;
+            capturePhotoBtn.addEventListener('click', function () {
+                const width = cameraPreview.videoWidth;
+                const height = cameraPreview.videoHeight;
 
-        if (file.size > maxSize) {
-            fileError.textContent = 'Image must be 5 MB or smaller.';
-            input.value = '';
-            resetPreview();
-            return;
-        }
+                if (!width || !height) {
+                    fileError.textContent = 'Camera is not ready yet. Please try again.';
+                    return;
+                }
+
+                cameraCanvas.width = width;
+                cameraCanvas.height = height;
+
+                const context = cameraCanvas.getContext('2d');
+
+                context.drawImage(
+                    cameraPreview,
+                    0,
+                    0,
+                    width,
+                    height
+                );
+
+                cameraCanvas.toBlob(function (blob) {
+                    if (!blob) {
+                        fileError.textContent = 'Photo could not be captured. Please try again.';
+                        return;
+                    }
+
+                    const file = new File(
+                        [blob],
+                        'camera-photo.jpg',
+                        { type: 'image/jpeg' }
+                    );
+
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    input.files = dataTransfer.files;
+
+                    stopCamera();
+
+                    cameraContainer.style.display = 'none';
+                    document.getElementById('aiUploadBox').style.display = '';
+
+                    input.dispatchEvent(new Event('change', { bubbles: true }));
+                }, 'image/jpeg', 0.92);
+            });
+
+            cancelCameraBtn.addEventListener('click', function () {
+                stopCamera();
+
+                cameraContainer.style.display = 'none';
+                document.getElementById('aiUploadBox').style.display = '';
+
+                fileError.textContent = '';
+            });
+
+            function stopCamera() {
+                if (cameraStream) {
+                    cameraStream.getTracks().forEach(function (track) {
+                        track.stop();
+                    });
+
+                    cameraStream = null;
+                }
+
+                cameraPreview.srcObject = null;
+            }
+
+        input.addEventListener('change', function () {
+
+            const file = this.files[0];
+
+            fileError.textContent = '';
+            selectedFile.textContent = '';
+            analyseButton.disabled = true;
+
+            if (!file) {
+                resetPreview();
+                return;
+            }
+
+            const allowedTypes = ['image/jpeg', 'image/png'];
+
+            if (!allowedTypes.includes(file.type)) {
+                fileError.textContent = 'Please choose a JPG or PNG image.';
+                input.value = '';
+                resetPreview();
+                return;
+            }
+
+            const maxSize = 5 * 1024 * 1024;
+
+            if (file.size > maxSize) {
+                fileError.textContent = 'Image must be 5 MB or smaller.';
+                input.value = '';
+                resetPreview();
+                return;
+            }
 
         const reader = new FileReader();
 
@@ -236,8 +356,9 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         reader.readAsDataURL(file);
+        
     });
-
+    
     function resetPreview() {
         preview.src = '';
         placeholder.style.display = 'flex';
