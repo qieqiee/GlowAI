@@ -14,6 +14,7 @@ export default defineConfig({
                 'resources/css/mua-bookings.css',
                 'resources/css/mua-services.css',
                 'resources/css/mua-navbar.css',
+                'resources/css/mua-profile.css',
                 'resources/js/app.js'
             ],
             refresh: true,
