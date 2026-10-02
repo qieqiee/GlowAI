@@ -15,6 +15,7 @@ export default defineConfig({
                 'resources/css/mua-services.css',
                 'resources/css/mua-navbar.css',
                 'resources/css/mua-profile.css',
+                'resources/css/admin.css',
                 'resources/js/app.js'
             ],
             refresh: true,
