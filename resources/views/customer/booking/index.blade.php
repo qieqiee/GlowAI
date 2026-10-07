@@ -713,63 +713,90 @@ function closeCustomerChat() {
 }
 
 
+/* CUSTOMER CHAT - ENTER TO SEND */
+document.addEventListener('keydown', function (event) {
+
+const textarea = event.target.closest('.embedded-chat-input');
+
+if (!textarea) {
+    return;
+}
+
+// Enter = send
+// Shift + Enter = new line
+if (event.key === 'Enter' && !event.shiftKey) {
+    event.preventDefault();
+
+    const form = textarea.closest('.embedded-chat-form');
+
+    if (form && textarea.value.trim() !== '') {
+        form.requestSubmit();
+    }
+}
+});
+
+
 /* SEND MESSAGE WITHOUT LEAVING MY BOOKINGS */
 document.addEventListener('submit', async function (event) {
 
-    const form =
-        event.target.closest('.embedded-chat-form');
+const form = event.target.closest('.embedded-chat-form');
 
-    if (!form) return;
+if (!form) {
+    return;
+}
 
-    event.preventDefault();
+event.preventDefault();
 
-    const textarea =
-        form.querySelector('.embedded-chat-input');
+const textarea = form.querySelector('.embedded-chat-input');
+const sendButton = form.querySelector('.embedded-chat-send');
 
-    const sendButton =
-        form.querySelector('.embedded-chat-send');
+const message = textarea.value.trim();
 
-    const message = textarea.value.trim();
+if (!message) {
+    return;
+}
 
-    if (!message) return;
+sendButton.disabled = true;
+sendButton.textContent = 'Sending...';
 
-    sendButton.disabled = true;
-    sendButton.textContent = 'Sending...';
+try {
 
-    try {
+    const formData = new FormData(form);
 
-        const formData = new FormData(form);
-
-        const response = await fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'Accept': 'application/json'
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Unable to send message.');
+    const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Accept': 'application/json'
         }
+    });
 
-        textarea.value = '';
-
-        const bookingId = form.dataset.bookingId;
-
-        await openCustomerChat(bookingId);
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert('Message could not be sent. Please try again.');
-
-    } finally {
-
-        sendButton.disabled = false;
-        sendButton.textContent = 'Send';
+    if (!response.ok) {
+        throw new Error('Unable to send message.');
     }
+
+    textarea.value = '';
+
+    /*
+     * Reload current conversation inside
+     * the customer floating chat after sending.
+     */
+    const bookingId = form.dataset.bookingId;
+
+    await openCustomerChat(bookingId);
+
+} catch (error) {
+
+    console.error(error);
+
+    alert('Message could not be sent. Please try again.');
+
+} finally {
+
+    sendButton.disabled = false;
+    sendButton.textContent = 'Send';
+}
 });
 
 </script>

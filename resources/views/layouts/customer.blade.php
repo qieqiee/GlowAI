@@ -91,26 +91,6 @@
                 My Bookings
             </a>
 
-
-            @if (!auth()->user()->makeupArtist)
-
-                <a
-                    href="{{ route('makeup-artist.register') }}"
-                    class="mua-cta {{ request()->routeIs('makeup-artist.register') ? 'active' : '' }}"
-                >
-                    Become a Makeup Artist
-                </a>
-
-            @else
-
-                <a
-                    href="{{ route('mua.dashboard') }}"
-                >
-                    MUA Dashboard
-                </a>
-
-            @endif
-
         </div>
 
 
