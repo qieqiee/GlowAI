@@ -4,7 +4,9 @@
 
         {{-- LOGO --}}
         <a
-            href="{{ route('mua.dashboard') }}"
+            href="{{ auth()->user()->makeupArtist
+                ? route('mua.dashboard')
+                : route('makeup-artist.register') }}"
             class="logo-link"
         >
             <img
@@ -38,45 +40,59 @@
 
             <div class="nav-links">
 
-                <a
-                    href="{{ route('mua.dashboard') }}"
-                    class="{{ request()->routeIs('mua.dashboard', 'dashboard') ? 'active' : '' }}"
-                    @if(request()->routeIs('mua.dashboard', 'dashboard')) aria-current="page" @endif
-                >
-                    Dashboard
-                </a>
+                @if(auth()->user()->makeupArtist)
 
-                <a
-                    href="{{ route('mua.availability') }}"
-                    class="{{ request()->routeIs('mua.availability*') ? 'active' : '' }}"
-                    @if(request()->routeIs('mua.availability*')) aria-current="page" @endif
-                >
-                    Calendar & Availability
-                </a>
+                    <a
+                        href="{{ route('mua.dashboard') }}"
+                        class="{{ request()->routeIs('mua.dashboard', 'dashboard') ? 'active' : '' }}"
+                        @if(request()->routeIs('mua.dashboard', 'dashboard')) aria-current="page" @endif
+                    >
+                        Dashboard
+                    </a>
 
-                <a
-                    href="{{ route('mua.bookings.index') }}"
-                    class="{{ request()->routeIs('mua.bookings.*') ? 'active' : '' }}"
-                    @if(request()->routeIs('mua.bookings.*')) aria-current="page" @endif
-                >
-                    Bookings
-                </a>
+                    <a
+                        href="{{ route('mua.availability') }}"
+                        class="{{ request()->routeIs('mua.availability*') ? 'active' : '' }}"
+                        @if(request()->routeIs('mua.availability*')) aria-current="page" @endif
+                    >
+                        Calendar & Availability
+                    </a>
 
-                <a
-                    href="{{ route('mua.services') }}"
-                    class="{{ request()->routeIs('mua.services*') ? 'active' : '' }}"
-                    @if(request()->routeIs('mua.services*')) aria-current="page" @endif
-                >
-                    Services
-                </a>
+                    <a
+                        href="{{ route('mua.bookings.index') }}"
+                        class="{{ request()->routeIs('mua.bookings.*') ? 'active' : '' }}"
+                        @if(request()->routeIs('mua.bookings.*')) aria-current="page" @endif
+                    >
+                        Bookings
+                    </a>
 
-                <a
-                    href="{{ route('mua.profile') }}"
-                    class="{{ request()->routeIs('mua.profile*', 'mua.portfolio.*', 'mua.review', 'makeup-artist.register*') ? 'active' : '' }}"
-                    @if(request()->routeIs('mua.profile*', 'mua.portfolio.*', 'mua.review', 'makeup-artist.register*')) aria-current="page" @endif
-                >
-                    Profile
-                </a>
+                    <a
+                        href="{{ route('mua.services') }}"
+                        class="{{ request()->routeIs('mua.services*') ? 'active' : '' }}"
+                        @if(request()->routeIs('mua.services*')) aria-current="page" @endif
+                    >
+                        Services
+                    </a>
+
+                    <a
+                        href="{{ route('mua.profile') }}"
+                        class="{{ request()->routeIs('mua.profile*', 'mua.portfolio.*', 'mua.review') ? 'active' : '' }}"
+                        @if(request()->routeIs('mua.profile*', 'mua.portfolio.*', 'mua.review')) aria-current="page" @endif
+                    >
+                        Profile
+                    </a>
+
+                @else
+
+                    <a
+                        href="{{ route('makeup-artist.register') }}"
+                        class="{{ request()->routeIs('makeup-artist.register*') ? 'active' : '' }}"
+                        @if(request()->routeIs('makeup-artist.register*')) aria-current="page" @endif
+                    >
+                        MUA Registration
+                    </a>
+
+                @endif
 
             </div>
 

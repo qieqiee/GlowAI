@@ -506,6 +506,24 @@
 
     });
 
+    document.addEventListener('keydown', function (event) {
+        const textarea = event.target.closest('.embedded-chat-input');
+
+        if (!textarea) {
+            return;
+        }
+
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+
+            const form = textarea.closest('.embedded-chat-form');
+
+            if (form && textarea.value.trim() !== '') {
+                form.requestSubmit();
+            }
+        }
+});
+
     document.addEventListener('submit', async function (event) {
 
 const form = event.target.closest('.embedded-chat-form');
