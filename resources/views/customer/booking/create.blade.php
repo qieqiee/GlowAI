@@ -34,7 +34,7 @@
 
 <form
     method="POST"
-    action="{{ route('customer.booking.payment') }}"
+    action="{{ route('customer.booking.payment', [], false) }}"
     class="booking-layout"
 >
     @csrf

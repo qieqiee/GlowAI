@@ -7,7 +7,7 @@
 <div class="payment-page">
 
     <a
-        href="javascript:history.back()"
+        href="{{ route('customer.booking.create', ['service' => $service->id, 'date' => $validated['booking_date']], false) }}"
         class="payment-back"
     >
         ← Back to booking
@@ -198,7 +198,7 @@
 
             <form
                 method="POST"
-                action="{{ route('customer.booking.payment.process') }}"
+                action="{{ route('customer.booking.payment.process', [], false) }}"
             >
                 @csrf
 

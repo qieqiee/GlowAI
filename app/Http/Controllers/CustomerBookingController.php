@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Client\ConnectionException;
 
 class CustomerBookingController extends Controller
 {
@@ -215,19 +217,49 @@ class CustomerBookingController extends Controller
         public function payment(Request $request)
     {
      
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'service_id' => 'required|exists:services,id',
-            'booking_date' => 'required|date',
-            'booking_time' => 'required',
+            'booking_date' => 'required|date_format:Y-m-d',
+            'booking_time' => 'required|date_format:H:i',
             'event_type' => 'required|string',
-            'appointment_location_type' => 'required|string',
+            'appointment_location_type' => 'required|in:studio,customer_location',
             'appointment_address' => 'nullable|string',
             'customer_phone' => 'required|string|max:30',
             'additional_notes' => 'nullable|string',
         ]);
 
-        $service = Service::with('makeupArtist.user')
-            ->findOrFail($validated['service_id']);
+        if ($validator->fails()) {
+            $service = Service::find($request->input('service_id'));
+            return redirect()->to($service
+                ? route('customer.booking.create', ['service' => $service->id, 'date' => $request->input('booking_date')], false)
+                : route('customer.mua.index', [], false))
+                ->withErrors($validator)->withInput();
+        }
+
+        $request->session()->put('booking_payment_draft', [
+            'customer_id' => Auth::id(),
+            'details' => $validator->validated(),
+        ]);
+
+        return redirect()->to(route('customer.booking.payment.summary', [], false), 303);
+    }
+
+    public function paymentSummary(Request $request)
+    {
+        $draft = $request->session()->get('booking_payment_draft');
+        if (!$draft || $draft['customer_id'] !== Auth::id()) {
+            $request->session()->forget('booking_payment_draft');
+            return redirect()->to(route('customer.mua.index', [], false))
+                ->withErrors(['payment' => 'Please select an appointment before continuing to payment.']);
+        }
+
+        $validated = $draft['details'];
+        $service = Service::with('makeupArtist.user')->find($validated['service_id']);
+        if (!$service) {
+            $request->session()->forget('booking_payment_draft');
+            return redirect()->to(route('customer.mua.index', [], false))
+                ->withErrors(['payment' => 'The selected service is no longer available.']);
+        }
 
         $servicePrice = $service->price;
 
@@ -251,8 +283,8 @@ class CustomerBookingController extends Controller
     {
         $validated = $request->validate([
             'service_id' => 'required|exists:services,id',
-            'booking_date' => 'required|date',
-            'booking_time' => 'required',
+            'booking_date' => 'required|date_format:Y-m-d',
+            'booking_time' => 'required|date_format:H:i',
             'event_type' => 'required|string',
             'appointment_location_type' => 'required|in:studio,customer_location',
             'appointment_address' => 'nullable|string',
@@ -451,7 +483,8 @@ class CustomerBookingController extends Controller
                 ]);
 
                 // 2. Create ToyyibPay bill
-                $response = Http::asForm()->post(
+                try {
+                $response = Http::asForm()->timeout(20)->post(
                     config('services.toyyibpay.base_url') . '/index.php/api/createBill',
                     [
                         'userSecretKey' =>
@@ -495,6 +528,13 @@ class CustomerBookingController extends Controller
                         'billChargeToCustomer' => 1,
                     ]
                 );
+
+                } catch (ConnectionException $e) {
+                    $booking->delete();
+                    return redirect()->to(route('customer.booking.payment.summary', [], false))
+                        ->withErrors(['payment' => 'Unable to connect to ToyyibPay. Please try again.'])
+                        ->withInput();
+                }
 
                 // 3. Read ToyyibPay response
                 $data = $response->json();
@@ -547,12 +587,32 @@ class CustomerBookingController extends Controller
             abort(404, 'Booking payment record not found.');
         }
     
+        abort_unless($booking->customer_id === Auth::id(), 403);
+
+        // Verify success with ToyyibPay, or use an already verified callback.
+        if ($statusId === '1' && $booking->payment_status !== 'paid') {
+            try {
+                $transactions = Http::asForm()->timeout(15)->post(
+                    rtrim(config('services.toyyibpay.base_url'), '/').'/index.php/api/getBillTransactions',
+                    ['billCode' => $billCode, 'billpaymentStatus' => '1']
+                );
+                $paid = $transactions->successful() && collect($transactions->json())
+                    ->contains(fn ($item) => is_array($item) && (string) ($item['billpaymentStatus'] ?? '') === '1');
+            } catch (ConnectionException $e) {
+                $paid = false;
+            }
+            if (!$paid) {
+                return redirect()->route('customer.bookings.show', $booking->id)
+                    ->withErrors(['payment' => 'Payment confirmation is still pending. Please check your booking shortly.']);
+            }
+        }
+
         // Successful payment
-        if ($statusId === '1') {
+        if ($statusId === '1' || $booking->payment_status === 'paid') {
     
             $booking->update([
                 'payment_status' => 'paid',
-                'toyyibpay_transaction_id' => $transactionId,
+                'toyyibpay_transaction_id' => $booking->toyyibpay_transaction_id ?? $transactionId,
             ]);
     
             return redirect()
@@ -567,9 +627,9 @@ class CustomerBookingController extends Controller
         }
     
         // Failed / cancelled payment
-        $booking->update([
-            'payment_status' => 'unpaid',
-        ]);
+        if ($booking->payment_status !== 'paid') {
+            $booking->update(['payment_status' => 'unpaid']);
+        }
     
         return redirect()
             ->route(
@@ -587,6 +647,24 @@ class CustomerBookingController extends Controller
 
     public function toyyibpayCallback(Request $request)
     {
+        $data = $request->validate([
+            'status' => 'required|in:1,2,3',
+            'order_id' => 'required|integer',
+            'billcode' => 'required|string',
+            'refno' => 'required|string',
+            'hash' => 'required|string',
+        ]);
+        $secret = config('services.toyyibpay.secret_key');
+        $expected = md5($secret.$data['status'].$data['order_id'].$data['refno'].'ok');
+        abort_unless($secret && hash_equals($expected, $data['hash']), 403);
+        $booking = Booking::whereKey($data['order_id'])
+            ->where('toyyibpay_bill_code', $data['billcode'])->firstOrFail();
+        if ($data['status'] === '1') {
+            $booking->update([
+                'payment_status' => 'paid',
+                'toyyibpay_transaction_id' => $data['refno'],
+            ]);
+        }
         return response('OK', 200);
     }
 

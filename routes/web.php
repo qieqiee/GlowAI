@@ -164,6 +164,10 @@ Route::middleware(['auth'])->group(function () {
         [CustomerMuaController::class, 'show']
     )->middleware('auth')->name('customer.mua.show');
 
+    Route::get('/customer/booking/payment',
+        [CustomerBookingController::class, 'paymentSummary']
+    )->name('customer.booking.payment.summary');
+
     Route::post(
         '/customer/booking/payment',
         [CustomerBookingController::class, 'payment']
@@ -184,7 +188,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/customer/booking/{service}',
         [CustomerBookingController::class, 'create']
-    )->middleware('auth')->name('customer.booking.create');
+    )->whereNumber('service')->middleware('auth')->name('customer.booking.create');
 
     Route::get('/mua/bookings',
         [MuaBookingController::class, 'index']
@@ -250,9 +254,7 @@ Route::middleware(['auth'])->group(function () {
         [CustomerBookingController::class, 'toyyibpayReturn']
     )->name('customer.booking.toyyibpay.return');
     
-    Route::post('/customer/payment/toyyibpay/callback',
-        [CustomerBookingController::class, 'toyyibpayCallback']
-    )->name('customer.booking.toyyibpay.callback');
+
 
     Route::middleware('auth')->group(function () {
 
@@ -288,5 +290,9 @@ Route::middleware(['auth'])->group(function () {
 
   
 });
+
+Route::post('/customer/payment/toyyibpay/callback',
+        [CustomerBookingController::class, 'toyyibpayCallback']
+    )->name('customer.booking.toyyibpay.callback');
 
 require __DIR__.'/auth.php';
