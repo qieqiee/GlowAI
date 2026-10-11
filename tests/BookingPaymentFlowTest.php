@@ -182,4 +182,51 @@ class BookingPaymentFlowTest extends \Tests\TestCase
             ->assertRedirect(route('customer.booking.create', $this->service->id))->assertSessionHasErrors('payment');
         $this->assertDatabaseCount('bookings', 0);
     }
+
+    public function test_payment_accepts_calendar_slots_from_a_0945_weekly_start(): void
+    {
+        Availability::where('makeup_artist_id', $this->service->makeup_artist_id)
+            ->update(['start_time' => '09:45', 'end_time' => '22:44']);
+        $this->service->update(['duration' => 120]);
+        Http::fake(['*/createBill' => Http::response([['BillCode' => 'offsetbill']], 200)]);
+        $this->actingAs($this->customer);
+        $calendar = $this->get('/customer/booking/'.$this->service->id.'?date='.$this->details['booking_date']);
+        $calendar->assertOk()->assertSee('value="09:45"', false)->assertSee('value="10:15"', false);
+        foreach (['09:45', '10:15', '10:45'] as $time) {
+            $data = [...$this->details, 'booking_time' => $time];
+            $this->post('/customer/booking/payment', $data)->assertStatus(303);
+            $this->get('/customer/booking/payment')->assertOk();
+            $this->post('/customer/booking/payment/process', $data)
+                ->assertRedirect('https://dev.toyyibpay.com/offsetbill');
+            // Isolate each accepted slot so overlap checks remain active.
+            Booking::query()->delete();
+        }
+    }
+
+    public function test_payment_accepts_a_calendar_slot_from_custom_working_hours(): void
+    {
+        \App\Models\AvailabilityOverride::create([
+            'makeup_artist_id' => $this->service->makeup_artist_id,
+            'override_date' => $this->details['booking_date'],
+            'start_time' => '09:43', 'end_time' => '20:42',
+        ]);
+        Http::fake(['*/createBill' => Http::response([['BillCode' => 'custombill']], 200)]);
+        $this->actingAs($this->customer);
+        $this->get('/customer/booking/'.$this->service->id.'?date='.$this->details['booking_date'])
+            ->assertOk()->assertSee('value="10:13"', false);
+        $this->post('/customer/booking/payment/process', [...$this->details, 'booking_time' => '10:13'])
+            ->assertRedirect('https://dev.toyyibpay.com/custombill');
+    }
+
+    public function test_payment_rejects_a_time_that_is_not_on_the_offered_grid(): void
+    {
+        Availability::where('makeup_artist_id', $this->service->makeup_artist_id)
+            ->update(['start_time' => '09:45', 'end_time' => '22:44']);
+        Http::fake();
+        $this->actingAs($this->customer)->from('/customer/booking/payment')
+            ->post('/customer/booking/payment/process', [...$this->details, 'booking_time' => '10:00'])
+            ->assertRedirect('/customer/booking/payment')->assertSessionHasErrors('booking_time');
+        $this->assertDatabaseCount('bookings', 0);
+        Http::assertNothingSent();
+    }
 }

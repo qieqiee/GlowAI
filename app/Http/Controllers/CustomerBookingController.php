@@ -396,7 +396,10 @@ class CustomerBookingController extends Controller
             ])->withInput();
         }
 
-        if (!in_array((int) $newBookingStart->format('i'), [0, 30])) {
+        // The calendar starts at the MUA's working start and advances 30 minutes.
+        // Validate against that same grid, including starts such as 09:45.
+        $secondsFromWorkingStart = $newBookingStart->getTimestamp() - $workingStart->getTimestamp();
+        if ($secondsFromWorkingStart % (30 * 60) !== 0) {
 
             return back()->withErrors([
                 'booking_time' => 'Invalid appointment time selected.'
